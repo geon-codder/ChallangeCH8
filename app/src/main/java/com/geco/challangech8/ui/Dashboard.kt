@@ -17,6 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.geco.challangech8.AppDatastore
 import com.geco.challangech8.MovieViewModel
@@ -24,6 +25,7 @@ import com.geco.challangech8.Routes
 import com.geco.challangech8.component.CustomTopAppBar
 import com.geco.challangech8.model.Movie
 import com.geco.challangech8.theme.Purple700
+import kotlinx.coroutines.launch
 
 
 private val movieViewModel = MovieViewModel()
@@ -56,7 +58,7 @@ fun DashboardPage(navController: NavHostController,context: Context){
                 }
                 Row {
                     Text(
-                        text = "Selamat Datang "+username,
+                        text = "Selamat Datang ",
                         fontSize = 15.sp,
                         color = Color.Black
                     )
@@ -64,7 +66,13 @@ fun DashboardPage(navController: NavHostController,context: Context){
                         text = AnnotatedString("Logout?"),
                         modifier = Modifier
                             .padding(5.dp),
-                        onClick = { navController.navigate(Routes.Login.route) },
+                        onClick = {
+                                    lifecycleOwner.lifecycleScope.launch {
+                                        appDatastore.setLoginStatus(0)
+                                    }.invokeOnCompletion {
+                                        navController.navigate(Routes.Login.route)
+                                    }
+                                  },
                         style = TextStyle(
                             fontSize = 14.sp,
                             color = Purple700

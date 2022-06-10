@@ -1,3 +1,5 @@
+@file:Suppress("PrivatePropertyName")
+
 package com.geco.challangech8
 
 import android.annotation.SuppressLint
@@ -5,6 +7,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.geco.challangech8.model.Movie
@@ -19,6 +22,7 @@ class AppDatastore(private val context: Context) {
     private val TITLE_MOVIE = stringPreferencesKey(name = "title_movie")
     private val OVERVIEW = stringPreferencesKey(name = "overview")
     private val POSTER = stringPreferencesKey(name = "poster")
+    private val LOGINSTATS = intPreferencesKey(name = "loginstatus")
 
     companion object {
 
@@ -56,6 +60,14 @@ class AppDatastore(private val context: Context) {
         context.datastore.edit { key ->
             key[USER_NAME] = name
         }
+    }
+    suspend fun setLoginStatus(stats: Int) {
+        context.datastore.edit { key ->
+            key[LOGINSTATS] = stats
+        }
+    }
+    val getLoginStatus: Flow<Int> = context.datastore.data.map { preferences ->
+        preferences[LOGINSTATS] ?: 0
     }
 
     suspend fun setUserPassword(pass: String) {

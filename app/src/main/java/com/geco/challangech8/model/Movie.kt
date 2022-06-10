@@ -20,9 +20,7 @@ data class Movie(
 
     @SerializedName("overview")
     val overview : String?
-): Parcelable{
-    constructor() : this("","","","","")
-}
+): Parcelable
 
 
 //data class Movie(

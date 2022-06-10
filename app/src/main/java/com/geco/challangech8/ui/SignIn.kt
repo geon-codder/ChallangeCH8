@@ -25,11 +25,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.geco.challangech8.AppDatastore
 import com.geco.challangech8.MainActivity
 import com.geco.challangech8.Routes
 import com.geco.challangech8.theme.Purple700
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginPage(navController: NavHostController, context: Context) {
@@ -89,7 +91,11 @@ fun LoginPage(navController: NavHostController, context: Context) {
                                         // Login Berhasil
                                         Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT)
                                             .show()
-                                        navController.navigate(Routes.Dashboard.route)
+                                        lifecycleOwner.lifecycleScope.launch {
+                                            appDatastore.setLoginStatus(1)
+                                        }.invokeOnCompletion {
+                                            navController.navigate(Routes.Dashboard.route)
+                                        }
                                     } else Toast.makeText(
                                         context,
                                         "Username or Password Wrong",

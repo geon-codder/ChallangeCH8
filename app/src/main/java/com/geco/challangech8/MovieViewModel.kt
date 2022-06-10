@@ -15,7 +15,6 @@ class MovieViewModel : ViewModel() {
 
     var movieListResponse:List<Movie> by mutableStateOf(listOf())
 
-
     fun getMovieData() {
         ApiClient.getInstance().getMovie()
             .enqueue(object: Callback<MovieResponse> {
