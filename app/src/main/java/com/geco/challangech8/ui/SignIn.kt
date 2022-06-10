@@ -79,7 +79,7 @@ fun LoginPage(navController: NavHostController, context: Context) {
             Button(
 //                onClick = { navController.navigate(Routes.Dashboard.route) },
                 onClick = {
-                    if (usernameState.value.toString().isEmpty() or passwordState.value.toString().isEmpty()){
+                    if ((usernameState.value.toString().isEmpty()) or passwordState.value.toString().isEmpty()){
                         Toast.makeText(context,"Username atau Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
                     } else {
                         appDatastore.getUserName.asLiveData().observe(lifecycleOwner) { name ->
@@ -107,15 +107,5 @@ fun LoginPage(navController: NavHostController, context: Context) {
                 Text(text = "Login")
             }
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-        ClickableText(
-            text = AnnotatedString("Forgot password?"),
-            onClick = { navController.navigate(Routes.ForgotPassword.route) },
-            style = TextStyle(
-                fontSize = 14.sp,
-                fontFamily = FontFamily.Default
-            )
-        )
     }
 }

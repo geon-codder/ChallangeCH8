@@ -23,12 +23,12 @@ fun ScreenMain(context: Context){
             SignUp(navController = navController, context)
         }
 
-        composable(Routes.ForgotPassword.route) { navBackStack ->
-            ForgotPassword(navController = navController)
+        composable(Routes.MovieDetail.route) { navBackStack ->
+            MovieDetail(navController = navController, context)
         }
 
         composable(Routes.Dashboard.route) {
-            Dashboard(navController = navController)
+            Dashboard(navController = navController, context)
         }
     }
 }

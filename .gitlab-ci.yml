@@ -1,0 +1,14 @@
+image: openjdk:8-jdk #Menentukan Docker Image
+
+variables:
+  ANDROID_COMPILE_SDK: "" #
+  ANDROID_BUILD_TOOLS: "" #
+  7ANDROID_SDK_TOOLS: "" #
+
+before_script:
+  #Installing Packages
+  - apt-get --quiet update --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+
+  #Installing Android SDK
+  - wget --quiet

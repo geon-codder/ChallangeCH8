@@ -13,6 +13,7 @@ import com.geco.challangech8.ui.ScreenMain
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             JetpackComposeDemoTheme {
                 Surface(

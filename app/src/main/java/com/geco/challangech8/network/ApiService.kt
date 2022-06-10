@@ -1,26 +1,16 @@
 package com.geco.challangech8.network
 
-import com.geco.challangech8.model.Movie
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.geco.challangech8.API_KEY
+import com.geco.challangech8.model.MovieResponse
+import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
-    @GET("movielist.json")
-    suspend fun getMovies() : List<Movie>
+    @GET("movie/popular")
+    fun getMovie(
+        @Query("api_key") api_key: String = API_KEY.apiKey,
+    ): Call<MovieResponse>
 
-
-    companion object {
-        var apiService: ApiService? = null
-        fun getInstance() : ApiService {
-            if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl("https://howtodoandroid.com/apis/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(ApiService::class.java)
-            }
-            return apiService!!
-        }
-    }
 }
 
